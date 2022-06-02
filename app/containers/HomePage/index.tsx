@@ -12,11 +12,17 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+import Home from './Home';
 
 export default function HomePage() {
   return (
-    <h1>
-      <FormattedMessage {...messages.header} />
-    </h1>
+    <div className="conainer">
+      <h1>
+        <FormattedMessage {...messages.header} />
+      </h1>
+      <div className="studentList">
+        <Home />
+      </div>
+    </div>
   );
 }

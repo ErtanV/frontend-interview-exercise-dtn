@@ -10,17 +10,18 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
-
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-
 import GlobalStyle from '../../global-styles';
+import EditStudent from 'containers/HomePage/EditStudent';
+
 function App() {
   return (
     <>
       <Router>
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/edit-student/:id" component={EditStudent} />
           <Route component={NotFoundPage} />
         </Switch>
         <GlobalStyle />

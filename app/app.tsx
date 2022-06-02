@@ -7,6 +7,7 @@
 
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Import all the third party stuff
 import * as React from 'react';

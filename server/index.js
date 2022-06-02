@@ -2,6 +2,8 @@
 
 const express = require('express');
 const logger = require('./logger');
+require('./db');
+const bodyParser = require('body-parser');
 
 const argv = require('./argv');
 const port = require('./port');
@@ -12,21 +14,48 @@ const ngrok =
     ? require('ngrok')
     : false;
 const { resolve } = require('path');
+const Student = require('./models/Student');
 const app = express();
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
 
-// In production we need to pass these values in instead of relying on webpack
-setup(app, {
-  outputPath: resolve(process.cwd(), 'build'),
-  publicPath: '/',
-});
+app.use(bodyParser.json());
 
 // get the intended host and port number, use localhost and port 3000 if not provided
 const customHost = argv.host || process.env.HOST;
 const host = customHost || null; // Let http.Server use its default IPv6/4 host
 const prettyHost = customHost || 'localhost';
+
+app.get('/api/student', async (req, res, next) => {
+  res.json(await Student.find().exec());
+});
+
+app.get('/api/student/:id', async (req, res, next) => {
+  const student = await Student.findOne({ _id: req.params.id });
+  res.json(student);
+});
+
+app.post('/api/student', async (req, res, next) => {
+  const student = await Student.create(req.body);
+  res.json(student);
+});
+
+app.patch('/api/student/:id', async (req, res, next) => {
+  const student = await Student.updateOne({ _id: req.params.id }, req.body);
+  res.json(student);
+});
+
+app.delete('/api/student/:id', async (req, res, next) => {
+  const student = await Student.deleteOne({ _id: req.params.id });
+  res.json(student);
+});
+
+// In production we need to pass these values in instead of relying on webpack
+setup(app, {
+  outputPath: resolve(process.cwd(), 'build'),
+  publicPath: '/static',
+});
 
 // use the gzipped bundle
 app.get('*.js', (req, res, next) => {
