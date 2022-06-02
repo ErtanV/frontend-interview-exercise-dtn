@@ -1,0 +1,5 @@
+I started wotking on front end. Created fake data to use for display on table. Created a table with action buttons. 
+Added a new page for editing and creating new students. Added some styling ,used mixins. Created a modal window using bootstrap. 
+Initialized mongoDb. Added CRUD for back end. Moved setup app bellow because I was having issues with same port for front and back. 
+Started testing fetch calls. Replaced fake data of students with db students. Tested POST GET DELETE PATCH. Also added a new route for studentByID. 
+Overall it was challenging expirience. I liked it a lot. Took me over 2 hours to complete (had to google a lot for back as I dont have much expirience with node.js)
